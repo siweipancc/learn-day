@@ -48,6 +48,13 @@
     - _相关代码_
         - [SwitchPatterns.java](src/main/java/com/pancc/learn/jdks/switchs/SwitchPatterns.java)
 
+## Web 相关
+
+- 206 分段请求
+    - _相关代码_
+        - [RangeRequest.java](src/main/java/com/pancc/learn/jdks/web/ranges/RangeRequest.java): 分段下载并合并
+    - [rfc9110](https://www.rfc-editor.org/rfc/rfc9110#field.accept-ranges)
+
 ## 虚拟机相关
 
 - 对象内存占用
