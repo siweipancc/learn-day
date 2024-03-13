@@ -47,3 +47,10 @@
     - [JEP 441](https://openjdk.org/jeps/441)
     - _相关代码_
         - [SwitchPatterns.java](src/main/java/com/pancc/learn/jdks/switchs/SwitchPatterns.java)
+
+## 虚拟机相关
+
+- 对象内存占用
+    - _相关代码_
+        - [EntityMm.java](src/main/java/com/pancc/learn/jdks/vm/EntityMm.java): 内存打印
+    - [IntelliJ IDEA 插件](https://plugins.jetbrains.com/plugin/10953-jol-java-object-layout)
