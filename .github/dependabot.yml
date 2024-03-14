@@ -14,6 +14,6 @@ updates:
     schedule:
       interval: "weekly"
   - package-ecosystem: "maven" 
-    directory: "/spring/spring-boot-jfx"
+    directory: "/Java/spring/spring-boot-jfx"
     schedule:
       interval: "weekly"
