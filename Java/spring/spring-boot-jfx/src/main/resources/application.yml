@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: spring-boot-jfx
+  main:
+    banner-mode: off
+    web-application-type: none
+pancc:
+  greet: "Hello?"
+  view:
+    main:
+      title: main-title
+    sub:
+      title: sub-title
+logging:
+  level:
+    javafx: error
+    com:
+      pancc:
+        learn:
+          spring:
+            boot:
+              jfx: debug

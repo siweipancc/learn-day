@@ -5,11 +5,15 @@
 
 version: 2
 updates:
-  - package-ecosystem: "maven" # See documentation for possible values
-    directory: "/Java/jdks" # Location of package manifests
+  - package-ecosystem: "maven" 
+    directory: "/Java/jdks" 
     schedule:
       interval: "weekly"
-  - package-ecosystem: "maven" # See documentation for possible values
-    directory: "/Java/guava" # Location of package manifests
+  - package-ecosystem: "maven" 
+    directory: "/Java/guava" 
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "maven" 
+    directory: "/spring/spring-boot-jfx"
     schedule:
       interval: "weekly"
