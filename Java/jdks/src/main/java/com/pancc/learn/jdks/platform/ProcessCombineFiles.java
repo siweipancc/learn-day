@@ -14,6 +14,7 @@ import static com.pancc.learn.jdks.platform.Processes.printProcess;
  * <a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/copy">copy</a>.
  *
  * @author Siweipancc
+ * @see com.pancc.learn.jdks.web.ranges.RangeRequest
  */
 public class ProcessCombineFiles {
     static StringBuffer sb = new StringBuffer();
@@ -21,7 +22,7 @@ public class ProcessCombineFiles {
     /**
      * 在临时目录创建多个临时文件 *.tmp.
      *
-     * @return 临时目录
+     * @return 临时目录f
      * @throws IOException IOException
      */
     static Path createFiles() throws IOException {
