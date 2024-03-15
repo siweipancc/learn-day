@@ -14,6 +14,8 @@ import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.StructuredTaskScope;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 /**
  * @author Siweipancc
@@ -23,7 +25,7 @@ public class RangeRequest {
     static HttpClient httpClient = HttpClient.newHttpClient();
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public void main() throws IOException, InterruptedException {
         URI uri = URI.create(url);
         HttpResponse<Void> response = httpClient.send(HttpRequest.newBuilder().HEAD().uri(uri).build(), HttpResponse.BodyHandlers.discarding());
         long contentLength = response.headers().firstValueAsLong(HttpHeaders.CONTENT_LENGTH).orElse(-1);
@@ -31,19 +33,18 @@ public class RangeRequest {
         Preconditions.checkState("bytes".equals(response.headers().firstValue(HttpHeaders.ACCEPT_RANGES).orElse(null)));
         long size = 4 * 1024;
 
-        Range[] ranges = createRanges(size, contentLength);
-        int minLen = String.valueOf(ranges.length).length() + 1;
+        Stream<Range> ranges = RangesGenerator.createOrderedRangeStream(size, contentLength);
+        long minLen = Long.valueOf(RangesGenerator.blocksCount(size, contentLength)).toString().length() + 1;
         Path tempDirectory = Files.createTempDirectory(null);
-
+        AtomicInteger integer = new AtomicInteger();
         try (StructuredTaskScope.ShutdownOnFailure taskScope = new StructuredTaskScope.ShutdownOnFailure()) {
-            for (int i = 0; i < ranges.length; i++) {
-                final Range range = ranges[i];
-                final String fileName = Strings.padStart(STR."\{i + 1}", minLen, '0').concat(".tmp");
+            ranges.forEach(range -> {
+                final String fileName = Strings.padStart(STR."\{integer.getAndAdd(1)}", (int) minLen, '0').concat(".tmp");
                 taskScope.fork(() -> {
                     HttpRequest httpRequest = HttpRequest.newBuilder().GET().uri(uri).header(HttpHeaders.RANGE, STR."bytes=\{range.startInclude()}-\{range.endInclude()}").build();
                     return httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofFile(tempDirectory.resolve(fileName))).body();
                 });
-            }
+            });
             taskScope.join();
         }
 
@@ -72,6 +73,7 @@ public class RangeRequest {
     }
 
 
+    @Deprecated
     public static Range[] createRanges(long blockSize, long contentLength) {
         if (blockSize >= contentLength) {
             return new Range[]{new Range(0, contentLength - 1)};
