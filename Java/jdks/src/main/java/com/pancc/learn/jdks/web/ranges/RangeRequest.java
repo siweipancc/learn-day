@@ -73,6 +73,9 @@ public class RangeRequest {
 
 
     public static Range[] createRanges(long blockSize, long contentLength) {
+        if (blockSize >= contentLength) {
+            return new Range[]{new Range(0, contentLength - 1)};
+        }
         long divided = contentLength / blockSize;
         long mod = contentLength % blockSize;
         Range[] ranges = new Range[(int) (mod != 0 ? divided + 1 : divided)];
