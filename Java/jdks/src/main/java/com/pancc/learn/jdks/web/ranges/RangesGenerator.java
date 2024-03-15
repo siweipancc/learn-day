@@ -33,6 +33,9 @@ public class RangesGenerator {
     @Nonnull
     public static Stream<Range> createOrderedRangeStream(final long blockSize, final long contentLength) throws IllegalArgumentException {
         long divided = blocksCount(blockSize, contentLength);
+        if (divided == 1) {
+            return Stream.of(new Range(0, contentLength - 1));
+        }
         long bound = contentLength - 1;
         return LongStream.range(0, divided).mapToObj((l) -> {
             long base = l * blockSize;
