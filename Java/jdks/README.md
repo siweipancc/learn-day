@@ -8,7 +8,7 @@
         - [UnaryOperators.java](src/main/java/com/pancc/learn/jdks/function/UnaryOperators.java): 二元化
 - URLConnection
     - _相关代码_
-        - [MineTy.java](src/main/java/com/pancc/learn/jdks/web/MineTy.java): 文件 mimetype 映射表
+        - [MineTypes.java](src/main/java/com/pancc/learn/jdks/web/minetypes/MineTypes.java): 文件 MineTypes 映射表
 - 系统编码
     - [JEP 400](https://openjdk.org/jeps/400)
     - _相关代码_
