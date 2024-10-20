@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <LangVersion>12</LangVersion>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <!--指向 windows 桌面-->
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <!--使用桌面表单功能-->
+        <UseWindowsForms>true</UseWindowsForms>
+    </PropertyGroup>
+
+</Project>
